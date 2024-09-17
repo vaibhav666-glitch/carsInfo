@@ -18,7 +18,7 @@ const fetchData = async () => {
         const data = response.data.data;
       // console.log(data);
 
-      //  Assuming data is an array of objects
+     
         const winner= data.map((val)=>{
             const key = val.status.substring(0, 4) === val.t1.substring(0, 4) ? val.t1 : val.t2;
             const value= val.status.substring(0,4)===val.t1.substring(0,4)?parseInt(val.t1s.substring(0,3)):parseInt(val.t2s.substring(0,3));
@@ -30,6 +30,7 @@ const fetchData = async () => {
         
         const maxEntry = winner.reduce((maxEntry, current) => {
             const currentValue = Object.values(current)[0];
+            //console.log(Object.values(current));
             const currentKey = Object.keys(current)[0];
             
             if (currentValue > maxEntry.value) {
