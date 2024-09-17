@@ -1,11 +1,12 @@
 import express from 'express';
 import axios from 'axios';
-import cors from 'cors';
-import bodyParser from 'body-parser';
+
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+
+const Router=express.Router();
+app.use(Router);
+
 
 const fetchData = async () => {
     try {
@@ -43,6 +44,7 @@ const fetchData = async () => {
 
 
          console.log('Highest Score:', maxEntry.value, 'and Team name is:', maxEntry.key);
+        
 
         let cnt=0;
         data.forEach(val => {
@@ -50,6 +52,11 @@ const fetchData = async () => {
                 cnt++;
         });
         console.log("Number Of Matches with total 300 Plus Score :", cnt);
+    Router.get('/api',(req,res)=>{
+        res.status(200).send({'(1) Highest Score': maxEntry.value, 'and Team name is': maxEntry.key,
+            " (2) Number Of Matches with total 300 Plus Score ": cnt});
+    })
+    
     } catch (err) {
         console.error('Error fetching data:', err);
     }
